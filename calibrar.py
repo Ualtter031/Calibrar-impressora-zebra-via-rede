@@ -35,7 +35,7 @@ xd = """
 ! U1 setvar "device.command_override.add" "^LL"
 ! U1 setvar "ezpl.print_mode" "tear off"
 ! U1 setvar "zpl.left_position" "100"
-! U1 setvar "zpl.label_top" "50"
+! U1 setvar "zpl.label_top" "100"
 
 ! U1 getvar "media.type" "label"
 ! U1 getvar "media.sense_mode" "gap"
@@ -49,18 +49,17 @@ xd = """
 ! U1 getvar "zpl.label_top" "100"
     """
 
-ip = str(input ("informe o ip do dispositivo: "))
+ip = str(input ("Informe o ip do dispositivo: "))
 client.connect((ip,6101))
 print('Conectando !\n')
 
-input_config = input(f'Qual operação a impressora pertence, XD ou SVC? ').encode('utf-8')
-def condicao():
-    if input_config:
-        return svc
-    else:
-        return xd
+operacao_imp = input(f'Qual operação a impressora pertence, XD ou SVC? ').encode('utf-8')
 
+if  operacao_imp == svc:
+    print(svc)
+else:
+    print (xd)
 
-client.send(input_config)
+client.send(operacao_imp)
 
-print(f'{condicao} Configuração efetuada com sucesso, aguarde 3 minutos e reinicie o dispositivo!\n')
+print(operacao_imp,'foi selecionado com sucesso, aguarde 3 minutos e reinicie o dispositivo!')
